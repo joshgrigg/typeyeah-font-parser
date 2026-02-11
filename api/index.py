@@ -8,7 +8,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fontTools.ttLib import TTFont
 from pydantic import BaseModel
 from typing import Optional
-from mangum import Mangum
 import tempfile
 import os
 
@@ -172,7 +171,3 @@ async def parse_font(file: UploadFile = File(...)):
         # Clean up temporary file
         if temp_path and os.path.exists(temp_path):
             os.unlink(temp_path)
-
-
-# Wrap the FastAPI app with Mangum for Vercel serverless deployment
-handler = Mangum(app, lifespan="off")
